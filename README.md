@@ -15,7 +15,7 @@ Works with **GLB, GLTF, OBJ, FBX, STL, PLY, USDZ, 3MF and DAE** files, objects b
 
 ## Install
 
-You need [Claude Code](https://claude.com/claude-code), [Node 18 or newer](https://nodejs.org), [git](https://git-scm.com) and [ffmpeg](https://ffmpeg.org/download.html) (on a Mac: `brew install ffmpeg`).
+You need [Claude Code](https://claude.com/claude-code), [Node 18 or newer](https://nodejs.org), [git](https://git-scm.com) and [ffmpeg](https://ffmpeg.org/download.html) (on a Mac: `brew install ffmpeg`). [pnpm](https://pnpm.io) is optional; npm works too.
 
 Paste these into a terminal, one line at a time:
 
@@ -37,13 +37,15 @@ pnpm install
 npx playwright install chromium
 ```
 
-That last one downloads the browser the skill draws in. If you already have it, it finishes straight away.
+That last one downloads the browser the skill draws in: about 500 MB, once. If that exact version is already on your computer, it finishes straight away.
 
-**Check it works.** This takes a few seconds and saves five pictures of a desk lamp, one per stage, in `test-lamp/stills/`:
+**Check it works.** This takes a few seconds and saves five pictures of a desk lamp, one per stage, in `test-lamp/stills/`, plus a `report.json`:
 
 ```bash
 node scripts/render.mjs --code evals/lamp-code-video/files/lamp.js --out test-lamp --only stills
 ```
+
+You should see three lines starting with `ok`. A line starting with `FAIL` is the skill's self-check saying something needs adjusting, usually the framing (`--fit`). Claude reads these and fixes them for you.
 
 Then start a new Claude Code session so it picks up the skill.
 
@@ -69,7 +71,7 @@ Plain words are enough. Claude picks the size, paper and framing, shows you stil
 |---|---|
 | `<name>.mp4` | The draw-on video, any size |
 | `<name>-seethrough.mov` | Optional. The paper is see-through, for laying over other footage |
-| `stills/*.png` | One picture per stage, for checking before the video is made |
+| `stills/*.png` | One picture per stage, for checking before the video is made. With a see-through version, also `seethrough-check.png` |
 | `moments.png` | Ten frames on one sheet, for review |
 | `report.json` | What's in the model, any warnings, and the self-checks |
 
@@ -129,7 +131,7 @@ These work for both `render.mjs` and `web.mjs`.
 | `--no-circles` | No circle guides |
 | `--only stills` | `render.mjs`: just the stills and report, in seconds |
 | `--at 1,2.5` | `render.mjs`: also save single frames at these seconds |
-| `--alpha` | `render.mjs`: also write a small see-through `.mov`. Mac only. Opens in Final Cut, DaVinci, Keynote, and Premiere on a Mac |
+| `--alpha` | `render.mjs`: also write a see-through `.mov` (a few times the size of the mp4). Mac only. Opens in Final Cut, DaVinci, Keynote, and Premiere on a Mac |
 | `--prores` | `render.mjs`: a see-through `.mov` that opens in any editor and can be made on any computer. About 20x larger |
 | `--play`, `--end` | `web.mjs`: how it plays and how it ends. See [references/web.md](references/web.md) |
 
@@ -140,7 +142,8 @@ These work for both `render.mjs` and `web.mjs`.
 - **Stands and floors** get drawn as part of the object unless you leave them out with `--drop`.
 - **Clear glass** over a dial or screen hides what's under it in the sketch. `--tone <glass material>=skip` fixes that.
 - **Big models** make heavy web pages. The report flags anything over 8 MB.
-- **A 7-second 1080p video takes about 30 seconds** to make on a recent laptop.
+- **A 7-second 1080p video takes about 30 seconds** to make on a recent laptop, and about twice that with a see-through version.
+- **White or uncoloured models** (an OBJ with no materials, say) end as a white render on near-white paper. Ask for a darker background, or use `--studio '#hex'`.
 
 ## What's in this repo
 
