@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: lamp-code-video
+expected_outcome: |
+  A 1920x1080 draw-on video of the lamp ending on the render, plus a see-through .mov, made from the code file without rewriting it; stills checked first; report checks pass.
+context:
+  scaffold_script: place-files.sh

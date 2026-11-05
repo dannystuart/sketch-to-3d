@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: kettle-obj-web
+expected_outcome: |
+  A web folder with the player, the model, a poster and a preview page, set to draw on with scroll and spin at the end, plus the paste-in code and plain instructions for adding it to a site.
+context:
+  scaffold_script: place-files.sh

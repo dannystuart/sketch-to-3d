@@ -1,0 +1,13 @@
+{
+  "name": "sketch-to-3d",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Marker-sketch draw-on for any three.js object: video and web output.",
+  "dependencies": {
+    "esbuild": "0.28.1",
+    "playwright": "1.58.2",
+    "three": "0.186.1"
+  },
+  "pnpm": {"onlyBuiltDependencies": ["esbuild"]}
+}

@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+# outputs people make while trying it
+sketch-out/
+sketch-web/
+out/
