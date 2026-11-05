@@ -34,21 +34,21 @@ whenNear($('#pin-sketch'), () => {
   use('pin', mount($('#pin-sketch'), {object: lamp, poster: 'lamp-poster.jpg', alt: 'A desk lamp, rendered in 3D', play: 'pin', end: 'spin', fit: 1.15, studio: '#FAFAF8'}));
 });
 
-// 3. sketch only: the kettle stops on the drawing; the paper can be swapped
+// 3. sketch only: the alarm clock stops on the drawing; the paper can be swapped
 const PAPER = {whitePaper: '#FAFAF8', pencil: '#F3F0E8', redSheet: '#D9261C'};
-const kettle = (pal, play = 'view') =>
-  mount($('#kettle-sketch'), {model: 'kettle.obj', poster: 'kettle-poster.jpg', alt: 'A kettle', play, end: 'spin', stopAt: 'sketch', colour: false, fit: 1.1, pal, studio: PAPER[pal]});
-whenNear($('#kettle-sketch'), () => use('kettle', kettle('whitePaper')));
+const clock = (pal, play = 'view') =>
+  mount($('#clock-sketch'), {model: 'alarm-clock.glb', poster: 'clock-poster.jpg', alt: 'An alarm clock', play, end: 'spin', stopAt: 'sketch', colour: false, fit: 1.05, tone: {alarm_clock_01_Glass: 'skip'}, pal, studio: PAPER[pal]});
+whenNear($('#clock-sketch'), () => use('clock', clock('whitePaper')));
 $$('.papers [role=radio]').forEach((b) =>
   b.addEventListener('click', async () => {
     if (b.getAttribute('aria-checked') === 'true') return;
     $$('.papers [role=radio]').forEach((x) => x.setAttribute('aria-checked', x === b));
     $('.paper-frame').dataset.pal = b.dataset.pal;
     $('.note-spin').classList.remove('show');
-    const old = players.kettle;
-    delete resolved.kettle;
+    const old = players.clock;
+    delete resolved.clock;
     (await old)?.destroy();
-    use('kettle', kettle(b.dataset.pal, 'load'));
+    use('clock', clock(b.dataset.pal, 'load'));
   }),
 );
 
@@ -76,7 +76,7 @@ const loop = () => {
   }
   $('.note-drag').classList.toggle('show', (resolved.hero?.progress ?? 0) >= 1);
   $('.pin-hint').classList.toggle('gone', (resolved.pin?.progress ?? 0) > 0.04);
-  $('.note-spin').classList.toggle('show', (resolved.kettle?.progress ?? 0) >= 1);
+  $('.note-spin').classList.toggle('show', (resolved.clock?.progress ?? 0) >= 1);
   requestAnimationFrame(loop);
 };
 requestAnimationFrame(loop);

@@ -18,7 +18,7 @@ Everything here came out of the skill itself, run from the repo root.
 node scripts/web.mjs evals/boombox-square-redsheet/files/boombox.glb --out <tmp> --play load --end spin --az 28 --fit 0.95 --aim 0,-0.12,0
 ```
 
-The same player file also draws the kettle (`kettle.obj`) and the lamp (`lamp.js`, passed in as `object`). The posters come from `web.mjs` runs on each.
+The same player file also draws the alarm clock (`alarm-clock.glb`, Poly Haven's Alarm Clock 01, with `tone: {alarm_clock_01_Glass: 'skip'}` and `fit: 1.05`) and the lamp (`lamp.js`, passed in as `object`). The posters are the `real.png` still from a `render.mjs` run on each.
 
 **`media/`** holds the short clips, made with `render.mjs` and then made smaller for the web (`ffmpeg -vf scale=…,fps=30 -crf 28`):
 
