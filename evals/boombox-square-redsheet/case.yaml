@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: boombox-square-redsheet
+expected_outcome: |
+  A 1080x1080 red-sheet video with no colour stage, framed tighter than default, with stills shown before the video and report checks passing.
+context:
+  scaffold_script: place-files.sh

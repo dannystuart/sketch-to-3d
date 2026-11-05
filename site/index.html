@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sketch-to-3d · a Claude skill</title>
+<meta name="description" content="A Claude skill that turns any 3D model into a marker sketch that draws itself on, then wipes to the real render. As a video, or live on a web page.">
+<meta property="og:title" content="sketch-to-3d">
+<meta property="og:description" content="Any 3D model, drawn as a marker sketch that turns into the real thing. A free Claude skill.">
+<meta property="og:image" content="media/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FAFAF8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%23D9261C' stroke-width='3'/%3E%3Cpath d='M4 26 28 6' stroke='%231d1b18' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Caveat:wght@600&family=Martian+Mono:wdth,wght@87.5,400;87.5,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="modulepreload" href="live/sketch-player.js">
+</head>
+<body>
+
+<a class="skip" href="#install">Skip to install</a>
+
+<!-- the title block, like the corner of a drawing sheet -->
+<header class="titleblock">
+  <a class="tb-name" href="#top">sketch&#8209;to&#8209;3d</a>
+  <span class="tb-cell tb-hide">A skill for Claude</span>
+  <span class="tb-cell tb-hide">Look: marker v1</span>
+  <a class="tb-cell" href="#install">Install</a>
+  <a class="tb-cell tb-gh" href="https://github.com/dannystuart/sketch-to-3d">GitHub <span aria-hidden="true">↗</span></a>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="guides" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 1000 700">
+    <line x1="-40" y1="610" x2="1040" y2="430"/>
+    <line x1="-40" y1="250" x2="1040" y2="560"/>
+    <line x1="620" y1="-20" x2="660" y2="720"/>
+    <line x1="905" y1="-20" x2="880" y2="720"/>
+    <line x1="-40" y1="120" x2="1040" y2="150"/>
+  </svg>
+
+  <div class="hero-copy">
+    <p class="kicker"><span class="dot"></span> Free skill for Claude Code</p>
+    <h1>Sketch it.<br>Then make it <em>real.</em></h1>
+    <p class="lede">Give Claude any 3D model. It draws it as a designer’s marker sketch, line by line, then wipes to the real render. You get a video at any size, or a live version for your website.</p>
+    <div class="cta">
+      <button class="copy big" data-copy="git clone https://github.com/dannystuart/sketch-to-3d.git ~/.claude/skills/sketch-to-3d">
+        <span class="copy-label">Copy install command</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="6" y="6" width="10" height="11" rx="2"/><path d="M4 13V4.5A1.5 1.5 0 0 1 5.5 3H12"/></svg>
+      </button>
+      <a class="link" href="#say">See what to ask for ↓</a>
+    </div>
+    <p class="formats">Works with <b>GLB</b> <b>GLTF</b> <b>OBJ</b> <b>FBX</b> <b>STL</b> <b>PLY</b> <b>USDZ</b> <b>3MF</b> <b>DAE</b> and three.js code.</p>
+  </div>
+
+  <figure class="hero-stage">
+    <div class="frame">
+      <div id="hero-sketch" class="sketch" role="img" aria-label="A boombox drawn as a marker sketch, which then turns into a 3D render"></div>
+      <span class="note note-drag" aria-hidden="true">drag to turn it
+        <svg viewBox="0 0 60 40"><path d="M4 6c18 2 34 10 44 26M48 32l-1-11M48 32l-10-4"/></svg>
+      </span>
+      <button class="replay" data-replay="hero" aria-label="Play the drawing again">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10a6 6 0 1 0 2-4.5M4 3v3.5h3.5"/></svg> Replay
+      </button>
+    </div>
+    <ol class="ticker" data-ticker="hero" aria-hidden="true">
+      <li>Circles &amp; box</li><li>Outlines</li><li>Pencil</li><li>Tracing</li><li>Marker</li><li>Colour</li><li>Render</li>
+    </ol>
+    <figcaption>Live, in this page. Not a video. <span class="credit">Boombox model: Poly Haven</span></figcaption>
+  </figure>
+</section>
+
+<!-- 01: WHAT YOU SAY -->
+<section class="block" id="say">
+  <header class="block-head">
+    <span class="num">01</span>
+    <h2>Just ask for it.</h2>
+    <p>No settings to learn. Say what you want in plain words and Claude picks the size, paper and framing, shows you stills first, then makes the video.</p>
+  </header>
+
+  <div class="ask ask-wide">
+    <div class="bubble">
+      <span class="who">You</span>
+      <p>I built a desk lamp in three.js code. Turn it into one of those sketch-to-render videos, widescreen, and give me a see-through version I can drop over other footage.</p>
+      <p class="got"><span>Claude</span> lamp.mp4 · lamp-seethrough.mov · stills · review sheet</p>
+    </div>
+    <div class="clip r16x9"><video muted loop playsinline preload="none" poster="media/lamp-16x9.jpg" aria-label="Video: a desk lamp sketched in red marker, then coloured blue and turned into a render"><source src="media/lamp-16x9.mp4" type="video/mp4"></video><span class="tag">1920 × 1080</span></div>
+  </div>
+
+  <div class="ask-pair">
+    <div class="ask">
+      <div class="bubble">
+        <span class="who">You</span>
+        <p>Make a square red-paper sketch of my boombox for Instagram. Skip the colour, go straight from the sketch to the real thing.</p>
+        <p class="got"><span>Claude</span> boombox.mp4 on red paper, 1080 × 1080</p>
+      </div>
+      <div class="clip r1x1"><video muted loop playsinline preload="none" poster="media/boombox-red-1x1.jpg" aria-label="Video: a boombox sketched in dark ink on red paper, then turned into a render"><source src="media/boombox-red-1x1.mp4" type="video/mp4"></video><span class="tag">1080 × 1080</span></div>
+    </div>
+    <div class="ask">
+      <div class="bubble">
+        <span class="who">You</span>
+        <p>Now the alarm clock, vertical, for Stories.</p>
+        <p class="got"><span>Claude</span> alarm-clock.mp4, 1080 × 1920</p>
+      </div>
+      <div class="clip r9x16"><video muted loop playsinline preload="none" poster="media/clock-9x16.jpg" aria-label="Video: an alarm clock sketched in red marker, coloured, then turned into a render"><source src="media/clock-9x16.mp4" type="video/mp4"></video><span class="tag">1080 × 1920</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02: PINNED SCROLL, LIVE -->
+<section class="block block-flush" id="web">
+  <header class="block-head">
+    <span class="num">02</span>
+    <h2>Or put it on your website, live.</h2>
+    <p>Ask for the web version and you get a small folder and a few lines of code to paste. This one draws on as you scroll. Scroll back and it rewinds.</p>
+  </header>
+
+  <div class="track" data-sketch-track>
+    <div class="pin">
+      <ol class="stages" data-ticker="pin">
+        <li><b>Circles &amp; box</b><span>Round parts get circles, the whole thing a construction box.</span><i></i></li>
+        <li><b>Outlines</b><span>The main outer lines go in.</span><i></i></li>
+        <li><b>Pencil</b><span>A faint first pass over every edge.</span><i></i></li>
+        <li><b>Tracing</b><span>Darker lines traced over the pencil.</span><i></i></li>
+        <li><b>Marker</b><span>Marker fill and a hatched shadow.</span><i></i></li>
+        <li><b>Colour</b><span>The object’s own colours, laid in like marker.</span><i></i></li>
+        <li><b>Render</b><span>A wipe to the real 3D render.</span><i></i></li>
+      </ol>
+      <div class="pin-stage">
+        <div class="frame pin-frame"><div id="pin-sketch" class="sketch" role="img" aria-label="A desk lamp that draws itself on as you scroll"></div></div>
+        <p class="pin-hint" aria-hidden="true">keep scrolling ↓</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ask ask-code">
+    <div class="bubble">
+      <span class="who">You</span>
+      <p>Put the lamp on my product page so it sketches itself in as people scroll, and they can drag to spin it at the end.</p>
+      <p class="got"><span>Claude</span> a folder for your site, and this:</p>
+    </div>
+<pre class="code"><code><span class="c">&lt;!-- put the sketch-to-3d folder on your site, then paste --&gt;</span>
+&lt;section data-sketch-track style="height: 300vh"&gt;
+  &lt;div id="lamp" style="position: sticky; top: 0; height: 100vh"&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;script type="module"&gt;
+  import {mount} from '/sketch-to-3d/sketch-player.js';
+  mount(document.getElementById('lamp'), {play: 'pin', end: 'spin'});
+&lt;/script&gt;</code></pre>
+    <p class="aside">Also comes as a React / Next.js component. Other ways to play: on load, when it scrolls into view, on hover, on click, or on a loop. Each one gets its own tab on a preview page so you can pick.</p>
+  </div>
+</section>
+
+<!-- 03: SKETCH ONLY -->
+<section class="block" id="sketch">
+  <header class="block-head">
+    <span class="num">03</span>
+    <h2>Stop on the sketch. Spin it.</h2>
+    <p>It doesn’t have to end on the render. Stop on the drawing and people can turn the sketch itself, because it’s live 3D, not a picture. Try another paper.</p>
+  </header>
+
+  <div class="paper-demo">
+    <div class="paper-frame" data-pal="whitePaper">
+      <div id="clock-sketch" class="sketch" role="img" aria-label="A marker sketch of an alarm clock you can drag to turn"></div>
+      <span class="note note-spin" aria-hidden="true">grab it ↻</span>
+    </div>
+    <div class="papers" role="radiogroup" aria-label="Paper">
+      <button role="radio" aria-checked="true" data-pal="whitePaper"><i style="--sw:#FAFAF8;--ink:#D9261C"></i>White paper</button>
+      <button role="radio" aria-checked="false" data-pal="pencil"><i style="--sw:#F3F0E8;--ink:#26241f"></i>Pencil</button>
+      <button role="radio" aria-checked="false" data-pal="redSheet"><i style="--sw:#D9261C;--ink:#2a0605"></i>Red sheet</button>
+      <button class="replay" data-replay="clock"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10a6 6 0 1 0 2-4.5M4 3v3.5h3.5"/></svg> Redraw</button>
+    </div>
+  </div>
+</section>
+
+<!-- 04: INSTALL -->
+<section class="install" id="install">
+  <header class="block-head">
+    <span class="num">04</span>
+    <h2>Install in a minute.</h2>
+    <p>You need <a href="https://claude.com/claude-code">Claude Code</a>, <a href="https://nodejs.org">Node 18 or newer</a> and <a href="https://ffmpeg.org/download.html">ffmpeg</a> (on a Mac: <code>brew install ffmpeg</code>). Paste these into a terminal, one at a time.</p>
+  </header>
+
+  <ol class="steps">
+    <li>
+      <p>Download the skill into Claude’s skills folder.</p>
+      <div class="cmd"><code>git clone https://github.com/dannystuart/sketch-to-3d.git ~/.claude/skills/sketch-to-3d</code><button class="copy" data-copy="git clone https://github.com/dannystuart/sketch-to-3d.git ~/.claude/skills/sketch-to-3d" aria-label="Copy"><span class="copy-label">Copy</span></button></div>
+    </li>
+    <li>
+      <p>Install what it needs to draw and record. A one-time download of about 500 MB, so give it a minute or two.</p>
+      <div class="cmd"><code>cd ~/.claude/skills/sketch-to-3d &amp;&amp; npm install &amp;&amp; npx playwright install chromium</code><button class="copy" data-copy="cd ~/.claude/skills/sketch-to-3d &amp;&amp; npm install &amp;&amp; npx playwright install chromium" aria-label="Copy"><span class="copy-label">Copy</span></button></div>
+    </li>
+    <li>
+      <p>Open Claude Code anywhere and ask for a sketch of your model.</p>
+      <div class="cmd say"><code>Make a marker sketch video of chair.glb, square, for Instagram.</code></div>
+    </li>
+  </ol>
+</section>
+
+<!-- 05: SPEC SHEET -->
+<section class="block" id="spec">
+  <header class="block-head">
+    <span class="num">05</span>
+    <h2>What you get.</h2>
+  </header>
+
+  <div class="spec">
+    <dl>
+      <div><dt>Video</dt><dd>An MP4 at any size: vertical, square, widescreen, 4K. About seven seconds.</dd></div>
+      <div><dt>See-through video</dt><dd>The paper drops out, so you can lay the drawing over other footage in Premiere, Final Cut, DaVinci or Keynote.</dd></div>
+      <div><dt>Stills</dt><dd>One picture per stage, shown to you before the video is made, plus a review sheet of ten moments.</dd></div>
+      <div><dt>Web folder</dt><dd>The player, your model and a poster image. One folder to put on your site.</dd></div>
+      <div><dt>Code to paste</dt><dd>For plain HTML, Webflow, Framer, React or Next.js. A preview page lets you try every way of playing.</dd></div>
+      <div><dt>Self-check</dt><dd>It checks its own framing and that lines only ever build up, and tells you what it found.</dd></div>
+    </dl>
+    <div class="spec-side">
+      <h3>Things you can ask for</h3>
+      <ul>
+        <li>Four papers: white, pencil, red sheet, blueprint</li>
+        <li>Closer, further, a different angle, a close-up on one part</li>
+        <li>No colour stage, or stop on the sketch</li>
+        <li>A longer hold on the final render</li>
+        <li>Hide a stand, a floor or clear glass</li>
+      </ul>
+      <h3>Good to know</h3>
+      <ul>
+        <li>Made objects work best. Raw 3D scans come out as scribble.</li>
+        <li>Bending (rigged) parts and point clouds aren’t drawn.</li>
+        <li>The small see-through file needs a Mac to make. The larger one works anywhere.</li>
+      </ul>
+      <a class="link" href="https://github.com/dannystuart/sketch-to-3d#readme">Every option in the README →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-mark">sketch&#8209;to&#8209;3d</div>
+  <p>Free and open source under the MIT licence. Built with <a href="https://threejs.org">three.js</a>.</p>
+  <p>Boombox and Alarm Clock 01 models by <a href="https://polyhaven.com">Poly Haven</a>, CC0. The lamp was made for this project.</p>
+  <p><a href="https://github.com/dannystuart/sketch-to-3d">github.com/dannystuart/sketch-to-3d</a></p>
+</footer>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
