@@ -24,7 +24,7 @@ export async function mount(el, o = {}) {
   const bg0 = el.style.background;
   el.style.background = paper;
   const canvas = document.createElement('canvas');
-  Object.assign(canvas.style, {position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block', touchAction: play === 'scroll' ? 'pan-y' : 'none'});
+  Object.assign(canvas.style, {position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block', touchAction: 'pan-y'});
   el.appendChild(canvas);
   const w = () => Math.max(1, el.clientWidth);
   const h = () => Math.max(1, el.clientHeight);
