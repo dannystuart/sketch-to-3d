@@ -29,3 +29,11 @@ The same player file also draws the alarm clock (`alarm-clock.glb`, Poly Haven's
 | `clock-9x16.mp4` | Poly Haven's Alarm Clock 01 as a GLB, `--size 1080x1920 --tone alarm_clock_01_Glass=skip --fit 1.0 --hold 1` |
 
 Each clip's poster is the `sketch.png` still from the same run.
+
+**`media/share-card.jpg`** is the link preview (1200 × 630). It splits two stills from one run with the camera held still, so the sketch and the render line up:
+
+```bash
+node scripts/render.mjs evals/boombox-square-redsheet/files/boombox.glb --out <tmp> --size 1400x1260 --az 28 --fit 0.95 --aim 0,-0.12,0 --studio '#FAFAF8' --turn 0 --only stills
+```
+
+`sketch.png` sits on the left of a slanted line and `real.png` on the right, next to the headline in the page's own fonts.
